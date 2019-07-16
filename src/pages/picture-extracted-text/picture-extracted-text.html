@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Extracted Text</ion-title>
+
+    <ion-buttons end>
+        <button
+          ion-button
+          icon-only
+          clear
+          (click)="close()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <span
+      *ngFor="let word of picture.extractedWords()"
+      [ngClass]="{'allergen-match': isAllergenMatch(word)}">
+    {{word}}
+  </span>
+</ion-content>

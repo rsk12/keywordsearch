@@ -1,0 +1,8 @@
+{
+  "name": "allergens",
+  "app_id": "05e7e6e5",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

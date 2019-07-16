@@ -1,0 +1,76 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{product.name}}</ion-title>
+
+    <ion-buttons end>
+      <button
+        ion-button
+        icon-only
+        color="primary"
+        (click)="addPicture()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+
+      <button
+        ion-button
+        icon-only
+        (click)="presentEdit()">
+        <ion-icon name="brush"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let picture of product.pictures">
+      <ion-thumbnail item-start>
+        <img [src]="picture.toData() | toSafeData">
+      </ion-thumbnail>
+
+      <p>{{picture.dateAdded}}</p>
+
+      <button
+        *ngIf="picture.text"
+        ion-button
+        clear
+        color="light"
+        (click)="viewText(picture)">
+        View Text
+      </button>
+
+      <p *ngIf="picture.containsAllergens()" color="danger">
+        {{picture.numAllergens()}} allergens found
+      </p>
+      <p *ngIf="!picture.containsAllergens()">
+        {{picture.status}}
+      </p>
+
+      <span class="scanner" item-end>
+        <ion-spinner  *ngIf="isScanning(picture)" name="dots"></ion-spinner>
+
+        <button
+          *ngIf="!isScanning(picture)"
+          ion-button
+          clear
+          (click)="scanPicture(picture)">
+          Scan
+        </button>
+      </span>
+
+      <button
+        item-end
+        ion-button
+        icon-only
+        clear
+        color="danger"
+        (click)="removePicture(picture)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

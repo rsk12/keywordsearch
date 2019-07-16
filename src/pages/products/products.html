@@ -1,0 +1,79 @@
+<!-- TODO: eliminate markup dupe -->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title start>Products</ion-title>
+
+    <ion-buttons end>
+      <button
+        ion-button
+        icon-only
+        (click)="addFromPicture()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+
+      <button
+        ion-button
+        icon-only
+        clear
+        color="primary"
+        (click)="add()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let product of items">
+      <ion-thumbnail item-start>
+        <img *ngIf="product.hasPictures()" [src]="product.thumbnail() | toSafeData">
+      </ion-thumbnail>
+
+      <button
+        ion-button
+        clear
+        color="light"
+        (click)="view(product)">
+        {{product.name}}
+      </button>
+
+      <h3>
+        <span *ngIf="product.containsAllergens()">
+          {{product.numAllergens()}} allergens found
+        </span>
+        <span *ngIf="!product.containsAllergens()">
+          {{product.status}}
+        </span>
+      </h3>
+
+      <p>
+        {{product.numPictures()}} photo(s)
+      </p>
+
+      <button
+        item-end
+        ion-button
+        icon-only
+        clear
+        (click)="edit(product)">
+        <ion-icon name="brush"></ion-icon>
+      </button>
+
+      <button
+        item-end
+        ion-button
+        icon-only
+        clear
+        color="danger"
+        (click)="remove(product)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+
+    </ion-item>
+  </ion-list>
+</ion-content>
+
